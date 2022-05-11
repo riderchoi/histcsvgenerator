@@ -17,7 +17,7 @@ start_day = int(input("Enter the start day:"))
 start_date = date(start_year,start_month,start_day)
 end_year = int(input("Enter the end year:"))
 end_month = int(input("Enter the end month:"))
-end_day = int(input("Enter the end day:"))+1
+end_day = int(input("Enter the end day:"))
 end_date = date(end_year,end_month,end_day)
 incoming_contact_volume = int(input("Enter incoming contact volume including abandoned call:"))
 contact_volume_range = int(input("How much higher and lower the range you wanna be?  if you enter 5, it will generate a number from Incoming Contact Volume-5 to Incoming Contact Volume+5:"))
@@ -66,10 +66,24 @@ for single_date in daterange(start_date, end_date):
         timestamp = single_date.strftime("%Y-%m-%dT")+f"{hours:02}"+":"+f"{minutes:02}"+":"+"00Z"
         row_list.insert(len(row_list), [queue_name,queue_id,channel_type,timestamp,interval_value,icv,aht,ch])
   elif interval_value == '30mins':
+    for hours in range (0,start_time,1):
+      for minutes in range(0,60,30):
+        icv = 0
+        aht = 0
+        ch = icv
+        timestamp = single_date.strftime("%Y-%m-%dT")+f"{hours:02}"+":"+f"{minutes:02}"+":"+"00Z"
+        row_list.insert(len(row_list), [queue_name,queue_id,channel_type,timestamp,interval_value,icv,aht,ch])
     for hours in range (start_time,stop_time,1):
       for minutes in range(0,60,30):
         icv = random.randrange(incoming_contact_volume-5,incoming_contact_volume+5)
         aht = random.randrange( avg_handle_time-20 , avg_handle_time+20 )
+        ch = icv
+        timestamp = single_date.strftime("%Y-%m-%dT")+f"{hours:02}"+":"+f"{minutes:02}"+":"+"00Z"
+        row_list.insert(len(row_list), [queue_name,queue_id,channel_type,timestamp,interval_value,icv,aht,ch])
+    for hours in range (stop_time,24,1):
+      for minutes in range(0,60,30):
+        icv = 0
+        aht = 0
         ch = icv
         timestamp = single_date.strftime("%Y-%m-%dT")+f"{hours:02}"+":"+f"{minutes:02}"+":"+"00Z"
         row_list.insert(len(row_list), [queue_name,queue_id,channel_type,timestamp,interval_value,icv,aht,ch])
