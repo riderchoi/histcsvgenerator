@@ -89,6 +89,6 @@ for single_date in daterange(start_date, end_date):
         row_list.insert(len(row_list), [queue_name,queue_id,channel_type,timestamp,interval_value,icv,aht,ch])
 	
 
-with open (queue_name+'-'+interval_value+'.csv','w',newline='') as file:
+with open (queue_name+'-'+interval_value+'-'+channel_type+'.csv','w',newline='') as file:
   writer = csv.writer(file)
   writer.writerows(row_list)
