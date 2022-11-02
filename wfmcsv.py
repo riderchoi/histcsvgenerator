@@ -75,8 +75,8 @@ for single_date in daterange(start_date, end_date):
         row_list.insert(len(row_list), [queue_name,queue_id,channel_type,timestamp,interval_value,icv,aht,ch])
     for hours in range (start_time,stop_time,1):
       for minutes in range(0,60,30):
-        icv = random.randrange(incoming_contact_volume-5,incoming_contact_volume+5)
-        aht = random.randrange( avg_handle_time-20 , avg_handle_time+20 )
+        icv = random.randrange(incoming_contact_volume-contact_volume_range,incoming_contact_volume+contact_volume_range)
+        aht = random.randrange(avg_handle_time-20 , avg_handle_time+20 )
         ch = icv
         timestamp = single_date.strftime("%Y-%m-%dT")+f"{hours:02}"+":"+f"{minutes:02}"+":"+"00Z"
         row_list.insert(len(row_list), [queue_name,queue_id,channel_type,timestamp,interval_value,icv,aht,ch])
